@@ -1,19 +1,17 @@
 pipeline {
   agent any
   stages {
-    stage('Stop and remove containers') {
+    stage('build docker image') {
       steps {
         sh """
-          docker compose -f docker-compose.yml stop
-          docker compose -f docker-compose.yml kill
-          docker compose -f docker-compose.yml rm -f -s -v
+          docker build -t symfony .
         """
       }
     }
     stage('Run docker compose') {
       steps {
         sh """
-          docker compose -f docker-compose.yml up -d --build --force-recreate -V --wait --timestamps
+          docker run -d -p 8000:8000 
         """
       }
     }
