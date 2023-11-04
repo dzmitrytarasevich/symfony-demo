@@ -11,7 +11,7 @@ pipeline {
     stage('Run docker compose') {
       steps {
         sh """
-          docker run -d -p 8000:8000 
+          docker run -d -p 8000:8000 symfony
         """
       }
     }
