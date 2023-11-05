@@ -1,6 +1,7 @@
 FROM composer:2.6.5 as BUILD
 
 RUN git clone https://github.com/symfony/demo.git my_project &&\
+    pwd &&\
     cd my_project/ &&\
     composer install
 
