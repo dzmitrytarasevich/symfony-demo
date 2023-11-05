@@ -10,6 +10,6 @@ RUN git clone https://github.com/symfony/demo.git my_project &&\
 
 EXPOSE 8000
 
-WORKDIR /app
+WORKDIR /my_project
 ENTRYPOINT ["symfony"]
 CMD ["serve"]
