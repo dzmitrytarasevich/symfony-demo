@@ -1,10 +1,12 @@
-FROM composer:2.6.5
+FROM composer:2.6.5 as BUILD
 
 RUN git clone https://github.com/symfony/demo.git my_project &&\
     cd my_project/ &&\
-    ls -la . &&\
-    composer install &&\
-    ls -la .
+    composer install
+
+
+FROM bitnami/symfony:6.3
+COPY --from=BUILD my_project/ .
 
 EXPOSE 8000
 
