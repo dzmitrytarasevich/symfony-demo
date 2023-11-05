@@ -6,14 +6,7 @@ pipeline {
     stage('build docker image') {
       steps {
         sh """
-          docker build -t symfony .
-        """
-      }
-    }
-    stage('Run docker compose') {
-      steps {
-        sh """
-          docker run -d -p 8000:8000 symfony
+          docker build -t local/symfony .
         """
       }
     }
