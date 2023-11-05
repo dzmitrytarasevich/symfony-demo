@@ -6,7 +6,14 @@ pipeline {
     stage('build docker image') {
       steps {
         sh """
-          docker build -t local/symfony .
+          docker build -t localhost:32000/symfony:latest .
+        """
+      }
+    }
+    stage('push docker image') {
+      steps {
+        sh """
+          docker push localhost:32000/symfony:latest
         """
       }
     }
