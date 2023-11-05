@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'vm-gog.com'
+    label 'vm'
   }
   stages {
     stage('build docker image') {
