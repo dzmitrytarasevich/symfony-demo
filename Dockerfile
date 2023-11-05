@@ -6,10 +6,10 @@ RUN git clone https://github.com/symfony/demo.git my_project &&\
 RUN pwd
 
 FROM bitnami/symfony:6.3
-COPY --from=BUILD my_project/ .
+COPY --from=BUILD /app/my_project/ /app
 
 EXPOSE 8000
 
-WORKDIR my_project
+WORKDIR /app
 ENTRYPOINT ["symfony"]
 CMD ["serve"]
