@@ -6,14 +6,15 @@ pipeline {
     stage('build docker image') {
       steps {
         sh """
-          docker build -t localhost:32000/symfony:latest .
+          docker build -t symfony:latest .
         """
       }
     }
     stage('push docker image') {
       steps {
         sh """
-          docker push localhost:32000/symfony:latest
+          docker save symfony:latest > symfony.tar
+          microk8s ctr image import symfony.tar
         """
       }
     }
