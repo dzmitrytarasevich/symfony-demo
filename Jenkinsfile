@@ -25,5 +25,8 @@ pipeline {
     always {
       cleanWs()
     }
+    success {
+      build job: "chart", wait: true
+    }
   }
 }
