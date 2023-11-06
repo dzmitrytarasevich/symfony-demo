@@ -1,16 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "demo.fullname" . }}
+  name: symfony-demo
   labels:
-    {{- include "demo.labels" . | nindent 4 }}
+    app.kubernetes.io/instance=symfony
+    app.kubernetes.io/managed-by=Helm
+    app.kubernetes.io/name=demo
+    app.kubernetes.io/version=1.0
+    helm.sh/chart=demo-0.1
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "demo.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/instance=symfony
+      app.kubernetes.io/name=demo
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +23,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "demo.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/instance=symfony
+        app.kubernetes.io/name=demo
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -28,13 +34,5 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
